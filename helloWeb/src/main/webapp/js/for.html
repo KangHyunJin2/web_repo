@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>js/for.html</title>
+	<script>
+		console.log('javasript start...');
+		//5번 반복.
+		for (let i = 0; i < 5; i++) {
+			console.log(i);
+		}
+
+		// 배열과 for 활용.
+		let numary = [1, 2, 3, 4, 5]; //배열객체.
+		let sum = 0;
+		console.log(typeof mumary)
+		//var 변수 : 전역 or 지역 (함수안에서 선언)
+		for (let i = 0; i < numary.length; i++) { //let , const : 블럭단위의 변수지정.
+			sum += numary[i];
+		}
+		console.log('sum의 값: ' + sum); //var 쓰면 밖에서 호출가능 let을 쓰는게 좋음
+		//확장 for..of.. 값만 가져올꺼면
+		sum = 0; // 0값으로 초기화 
+		for(let val of numary){
+			sum += val;
+		}
+		console.log(`sum의 값: ${sum}`);
+		
+		sum = 0; //0값으로 초기화
+		//배열.forEach(함수)
+		//https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+		numary.forEach(function(item,idx,ary){
+			//console.log(item,',',idx,',',ary); 출력하는 타입을 볼수잇음
+			//sum += item; 15 값
+			//if(item % 2 == 0) 짝수 조건
+			if(idx <= 2){   //1,2,3번째
+				sum += item;
+			}
+		})
+		console.log(`sum의 값: ${sum}`);
+	</script>
+</head>
+
+<body>
+</body>
+
+</html>
