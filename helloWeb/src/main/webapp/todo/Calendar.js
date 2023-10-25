@@ -1,6 +1,8 @@
 //Calendar.js
 
-makeTr(calendar = 
+makeTr(calendar = {월,화,수,목,금,토,일}
+
+
 
 function makehead(){
 	let cal = ['월','화','수','목','금','토','일'];
