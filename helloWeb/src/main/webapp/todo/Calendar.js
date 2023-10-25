@@ -21,5 +21,6 @@ function makeCalendar(calendar) {
 const calendars = [
    week = {일,월,화,수,목,금,토}
 ]
+console.log('a');
 
 week.makeHtml(calendars);
