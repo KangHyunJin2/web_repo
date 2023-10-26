@@ -8,31 +8,60 @@ result.forEach((acc) => console.log(acc));
 
 
 //2 생년월일 입력 => 남자/ 여자,
-function checkGendar(ssn){
+function checkGender(ssn){
     // 950305-1678532   , 
     // 950305 1678532,
     // 9 5 0305 1678532
 
     //950305-1678532, 
     //9503051678532,
-    //9503051678532
+    //950305167853
+    
 
     ssn = ssn.trim();
-    ssn = ssn.split(' ').filter(el=>el!='').join('');
-
-    if(ssn.indexOf("-") > 0 ){
+    ssn = ssn.split(' ').filter(el=>el!= '').join('');
+	
+    let = gender = '';
+	if(ssn.indexOf("-") > 0){
         ssn[7]
     }
-    else{
+    else {
         ssn[6]
     }
-    if(gender == 1){
-        console.log("남자")
+    if(gender == "1" || gender == "3"){
+        hender = "남자";
     }
+    else{
+        gender = "여자";
+    }
+    return gender
+
+    
+    
+    
+	//return '남자' || '여자';
 }
 
+console.log(checkGender("960501-1176898"));
 
 
-//3. 파일명과 파일의 확장자.
+
+// 3. 파일명과 파일의 확장자.
 let file = "d:/temp/sample/book.xls";
-let fileName, fileExt;
+let fileName = '';
+let fileExt = '';
+
+let idx = file.lastIndexOf('/');
+if(idx < 0) {
+    FileSplit = file.split('.');
+}
+else {
+    FileSplit = file.substring(idx + 1, file.length).split('.');
+}
+
+fileName = FileSplit[0];
+fileExt = FileSplit[1];
+
+console.log(fileName);
+console.log(fileExt);
+
