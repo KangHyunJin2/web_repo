@@ -1,37 +1,52 @@
 //Calendar.js
+//calendar => table
+const today = new Date();
+console.log('오늘날짜: ', today.getDate());
+//makeHead()
+function makeHead() {
+	const days = ['일', '월', '화', '수', '목', '금', '토']
+	return days.reduce((acc, day) => {
+		return acc + '<th>' + day + '</th>';
+	}, '<thead><tr>')
 
-function makehead(){
-	let cal = ['월','화','수','목','금','토','일'];
-	let head = '';
-	head += '<table border="1"><thead>';
-	cal.forEach((item) => head += '<th>' + item + '</th>');
-	head += '</thead>';
 }
-//cal.forEach((item) => console.log(item))
+//makeBody()
+function makeBody() {
+	let tbody = '</thead><tbody><tr>';
+	for (let i = 1; i <= 31; i++) {
+		console.log(i);
+		//tbody += '<td align="center">'+ i +'</td>';
+		//오늘날짜는 백그라운드:노란색, 폰트 : bold , 일요일은 백그라운드 :빨간색,글자색:노란색
 
-// makeHtml(calAry) {
-//     let table = '<table border="1"><tbody>';
-//     table += calAry.reduce((acc, cal) => {});
+		let styles = '';
+		if (i % 7 == 1) {
+			styles = 'background:red; color:yellow;';
+			if (i == today.getDate()) {
+				styles += 'font-weight: bolder';
+			}
 
-//     table += '</tbody></table>';
-// }
+			tbody += '<td style="' + styles + '"align="right">' + i + '</td>';
+		} else {
+			if (i == today.getDate()) {
+				styles += 'font-weight: bolder; background:yellow;';
+			}
+			tbody += '<td style="' + styles + '"align="right">' + i + '</td>';
+		}
+		if (i % 7 == 0) {
 
-const calendars = [
-   week = {일,월,화,수,목,금,토}
-]
+			tbody += '</tr><tr>';
+		}
 
-week.makeHtml(calendars);
-function makebody(){
-	let body = '';
-	body += '<tbody>';
-	for(let i = 1; i <= 31; ++i){
-		body +='<tr>' + i + '</tr>';
-		if(i % 7){
-			body += '<td></td>';
-		
-		body +='</tr>';
-		body +='</tbdoy>'
 	}
+	tbody += '</tr></tbody>';
+	return tbody;
+
 }
+
+function makeCalendar() {
+	let thead = makeHead();
+	let tbody = makeBody();
+	let table = '<table border="1">' + thead + tbody + '</table>'
+	document.getElementById('show').innerHTML = table;
 }
-	const Calendar = [31,28,31,30,31,30,31,31,30,31,30,31];
+makeCalendar();
