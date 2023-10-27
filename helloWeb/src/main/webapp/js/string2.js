@@ -8,37 +8,38 @@ result.forEach((acc) => console.log(acc));
 
 
 //2 생년월일 입력 => 남자/ 여자,
-function checkGender(ssn){
-    // 950305-1678532   , 
-    // 950305 1678532,
-    // 9 5 0305 1678532
+function checkGender(ssn) {
+	// 950305-1678532   , 
+	// 950305 1678532,
+	// 9 5 0305 1678532
 
-    //950305-1678532, 
-    //9503051678532,
-    //950305167853
-    
+	//950305-1678532, 
+	//9503051678532,
+	//950305167853
 
-    ssn = ssn.trim();
-    ssn = ssn.split(' ').filter(el=>el!= '').join('');
+
+	ssn = ssn.trim();
+	ssn = ssn.split(' ').filter(el => el != '').join('');
+
+	let = gender = '';
+	if (ssn.indexOf("-") > 0) {
+		gender = ssn[7]
+	}
+	else {
+		gender = ssn[6]
+	}
 	
-    let = gender = '';
-	if(ssn.indexOf("-") > 0){
-        ssn[7]
-    }
-    else {
-        ssn[6]
-    }
-    if(gender == "1" || gender == "3"){
-        hender = "남자";
-    }
-    else{
-        gender = "여자";
-    }
-    return gender
+	if (gender == "1" || gender == "3") {
+		gender = "남자";
+	}
+	else {
+		gender = "여자";
+	}
+	return gender
 
-    
-    
-    
+
+
+
 	//return '남자' || '여자';
 }
 
@@ -52,11 +53,11 @@ let fileName = '';
 let fileExt = '';
 
 let idx = file.lastIndexOf('/');
-if(idx < 0) {
-    FileSplit = file.split('.');
+if (idx < 0) {
+	FileSplit = file.split('.');
 }
 else {
-    FileSplit = file.substring(idx + 1, file.length).split('.');
+	FileSplit = file.substring(idx + 1, file.length).split('.');
 }
 
 fileName = FileSplit[0];
