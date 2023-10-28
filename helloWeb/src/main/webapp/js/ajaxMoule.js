@@ -11,6 +11,8 @@ const table = {
 		headTag += "</thead></tr>";
 		return headTag;
 	}, //<----- 콤마 잘보기
+	
+	
 	makeBody(dataAry = [{ mid, pass, name, phone }]) {
 		let bodyTag = "<tbody id='list'>";
 		dataAry.forEach(item => {
@@ -23,12 +25,16 @@ const table = {
 		bodyTag += "</tbody>";
 		return bodyTag;
 	},
+	
+	
 	makeTable(titleAry, dataAry) {
 		let tableTag = "<table border='1'>";
 		tableTag += this.makeHead(titleAry) + this.makeBody(dataAry);
 		tableTag += "</table>";
 		return tableTag;
 	},
+	
+	
 	makeTr(data = {mid,pass,name,phone}){
 		let tr = "<tr>";
 		for (let prop in data) {
@@ -36,7 +42,17 @@ const table = {
 			}
 		tr += "</tr>";
 		return tr;
+	},
+	
+	
+	makeTb(obj = {mid,pass,name,phone}){
+		let tr = "<tr>";
+		for( let prop in obj){
+			tr += "<td>" + obj[prop] + "</td>";
+		}
+		tr += "</tr>";
+		return tr;
 	}
 }
 
-export { table }
+export { table };
