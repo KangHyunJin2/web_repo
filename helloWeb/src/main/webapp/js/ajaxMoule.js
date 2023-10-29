@@ -12,7 +12,6 @@ const table = {
 		return headTag;
 	}, //<----- 콤마 잘보기
 	
-	
 	makeBody(dataAry = [{ mid, pass, name, phone }]) {
 		let bodyTag = "<tbody id='list'>";
 		dataAry.forEach(item => {
