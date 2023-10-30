@@ -71,9 +71,9 @@ public class MemberServiceImpl implements MemberService {
 			}
 
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
-			
+
 		} finally {
 			try {
 				if (rs != null)
@@ -87,6 +87,41 @@ public class MemberServiceImpl implements MemberService {
 			}
 		}
 
+		return false;
+	}
+
+	@Override
+	public boolean modifyMember(MemberVO vo) {
+		String sql = "UPDATE MEMBER2 SET PASS=? , NAME=? , PHONE=? WHERE MID=?";
+		conn = dataSource.getConnection();
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getPass());
+			psmt.setString(2, vo.getName());
+			psmt.setString(3, vo.getPhone());
+			psmt.setString(4, vo.getMid());
+
+			int r = psmt.executeUpdate();
+			if (r == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (psmt != null)
+					psmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return false;
 	}
 }

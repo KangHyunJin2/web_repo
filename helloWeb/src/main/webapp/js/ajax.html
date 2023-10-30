@@ -7,7 +7,57 @@
 </head>
 
 <body>
+	<table border="1">
+		<tr>
+			<th>아이디</th>
+			<td><input id="mid"></td>
+		</tr>
+		<tr>
+			<th>비밀번호</th>
+			<td><input id="pass"></td>
+		</tr>
+		<tr>
+			<th>이름</th>
+			<td><input id="name"></td>
+		</tr>
+		<tr>
+			<th>연락처</th>
+			<td><input id="phone"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<button id="addBtn" onclick="addMember()">등록</button>
+				<button id="modBtn" onclick="addMember()">수정</button>
+			</td>
+		</tr>
+	</table>
+	<hr>
 	<div id="show"></div>
+	</table>
+
+	<script>
+		function showInfo(e, obj) {
+			//이벤트값
+			console.log(e);
+			console.log(e.target.parentElement); // e.taget: td.
+			console.log(obj); // this: tr.
+			//tr의 하위: 아이디,비번,이름,연락처.
+			console.log(obj.children); // tr의 하위요쇼들 ...td
+			let mid = obj.children[0].innerHTML;
+			let pass = obj.children[1].innerHTML;
+			let name = obj.children[2].innerHTML;
+			let phone = obj.children[3].innerHTML;
+
+			document.getElementById('mid').value = mid;
+			document.getElementById('pass').value = pass;
+			document.getElementById('name').value = name;
+			document.getElementById('phone').value = phone;
+
+		}
+	</script>
+
+	<script type="module" src="ajax1.js"></script>
+
 	<script type="module" src="ajax2.js"></script>
 </body>
 

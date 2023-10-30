@@ -19,17 +19,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 /**
- * Servlet implementation class AddMemberServ
+ * Servlet implementation class ModMemberServ
  */
-//http://localhost:8080/helloWeb/AddMemberServ.html?mid=M009&pass=9999&name=Kim&phone=010-9876-0987
-@WebServlet("/AddMemberServ.html")
-public class AddMemberServ extends HttpServlet {
+@WebServlet("/ModMemberServ.html")
+public class ModMemberServ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddMemberServ() {
+    public ModMemberServ() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,20 +38,16 @@ public class AddMemberServ extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		//!!정말정말 중요해요 기억합시다!!
-		
-		//mid=M009&pass=9999&name=Kim&phone=010-9876-0987
-		//(mid,pass,name,phone) {mid....} 위와 넘기는 방식이 다르지만 의미는 같다
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/josn; charset=UTF-8");
+		//수정처리하는 서블릿.
+		//파라메타 mid, pass , name , phone => update 처리.
 		
 		String mid = request.getParameter("mid");
 		String pass = request.getParameter("pass");
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
 		
-		//멤버 인스턴스 선언
 		MemberVO vo = new MemberVO(mid,pass,name,phone);
 		
 		MemberService svc = new MemberServiceImpl();
@@ -60,14 +55,12 @@ public class AddMemberServ extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		Gson gson = new GsonBuilder().create();
-//		String json = gson.toJson(vo);
 		
-		//Map.
-		Map<String, Object> map = new HashMap<>();
+		Map<String , Object> map = new HashMap<>();
 		map.put("retCode", "OK");
 		map.put("vo", vo);
 		
-		if(svc.addMember(vo)) {
+		if(svc.modifyMember(vo)) {
 			map.put("retCode", "OK");
 			map.put("vo", vo);
 		} else {
@@ -76,7 +69,7 @@ public class AddMemberServ extends HttpServlet {
 		}
 		String json = gson.toJson(map);
 		out.print(json);
-	}	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

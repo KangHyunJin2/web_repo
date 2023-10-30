@@ -81,7 +81,7 @@ function loadJson() {
 
 	result1 = table.makeTable(titles, dataAry);
 
-	document.getElementById('show').innerHTMl += result1;
+	document.getElementById('show').innerHTML += result1;
 }
 
 
@@ -115,24 +115,3 @@ function loadXML() {
 	document.getElementById('show').innerHTML += result;
 	document.getElementById('list').innerHTML += bbo;
 } // end of onload.
-
-
-// filter 와 find 의 차이는 filter 는  조건에 시작하는 배열 전체를 가져오지만 find는 String 타입으로 하나만 가져옴
-// some은 true , false 로 값을 반환하는 타입 한명이라도 조건에 맞으면 true 그와 반대로 every 는 모두가 조건에 맞아야 true , false 로 값을 반환한다
-// findIndex 는 그냥 index 번호를 값을 반환
-/*let ceoList = [
-	{name:"Larry Page" , age:23 , ceo:true},
-	{name:"Kang Jin", age:28 , ceo:false},
-	{name:"Lee Ju" , age:32 , ceo:true}
-	
-]
-
-let data1 = ceoList.filter((obj) => { //조건
-	return obj.age == 23
-})
-console.log(data1);
-
-let data = ceoList.map((obj) => {
-	return obj;  //이름만 띄우고 싶을떄는 obj.name 
-})
-console.log(data)*/
