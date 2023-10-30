@@ -28,13 +28,6 @@ const table = {
 		return tableTag;
 	},
 	
-/*	makeTr(data = {code,title,author,press,price}){
-		let tr = "<tr onclick='showInfo(event, this)'>";
-		for(let prop in data){
-			tr += "<td>" + data[prop] + "</td>";
-		}
-		tr += "</tr>";
-		return tr;
-	}*/
+
 }
 export{table};

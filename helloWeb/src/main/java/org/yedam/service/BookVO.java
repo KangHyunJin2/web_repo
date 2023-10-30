@@ -14,4 +14,5 @@ public class BookVO {
 	private String author;
 	private String press;
 	private String price;
+	
 }
