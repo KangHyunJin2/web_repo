@@ -2,7 +2,7 @@
 // Asynchronous Javascript And XML:
 //비동기 vs. 동기
 //동기 방식 순차적으로 처리 a > b > c > d 이런식
-import { table } from './ajaxMoule.js';
+import { table } from './ajaxModule.js';
 
 let friends = [];
 //동기 방식
@@ -58,8 +58,7 @@ let xhtp = new XMLHttpRequest();
 //xhtp.onload = loadXML; 
 
 
-let newMember2 = //JSON 꺼얌
-		{ mid: "M006", pass: "9999", name: "미주", phone: "010-3355-5555"};
+
 //JSON 실행
 xhtp.open('get', '../MemberListServlet2');
 xhtp.send();
@@ -68,18 +67,21 @@ xhtp.onload = loadJson;
 function loadJson() {
 	console.log(xhtp.responseText);
 	
-	let result = JSON.parse(xhtp.responseText); //Json 문자열 -> 오브
+	let result1 = JSON.parse(xhtp.responseText); //Json 문자열 -> 오브
 	
-	console.log(result);
+	console.log(result1);
 	
 	let titles = ["회원번호", "비밀번호", "이름", "연락처"];
 	
-	let tb = table.makeTable(titles, result);
+	let dataAry = [];
 	
-	let newM = table.makeTb(newMember2);
-	
-	document.getElementById('show').innerHTML += tb;
-	document.getElementById('list').innerHTMl += newM;
+	result1.forEach(member =>{
+		dataAry.push({mid:member.mid, pass: member.pass, name: member.name, phone:member.phone})
+	})
+
+	result1 = table.makeTable(titles, dataAry);
+
+	document.getElementById('show').innerHTMl += result1;
 }
 
 
@@ -118,7 +120,7 @@ function loadXML() {
 // filter 와 find 의 차이는 filter 는  조건에 시작하는 배열 전체를 가져오지만 find는 String 타입으로 하나만 가져옴
 // some은 true , false 로 값을 반환하는 타입 한명이라도 조건에 맞으면 true 그와 반대로 every 는 모두가 조건에 맞아야 true , false 로 값을 반환한다
 // findIndex 는 그냥 index 번호를 값을 반환
-let ceoList = [
+/*let ceoList = [
 	{name:"Larry Page" , age:23 , ceo:true},
 	{name:"Kang Jin", age:28 , ceo:false},
 	{name:"Lee Ju" , age:32 , ceo:true}
@@ -133,4 +135,4 @@ console.log(data1);
 let data = ceoList.map((obj) => {
 	return obj;  //이름만 띄우고 싶을떄는 obj.name 
 })
-console.log(data)
+console.log(data)*/

@@ -37,9 +37,6 @@ function checkGender(ssn) {
 	}
 	return gender
 
-
-
-
 	//return '남자' || '여자';
 }
 

@@ -42,16 +42,6 @@ const table = {
 		tr += "</tr>";
 		return tr;
 	},
-	
-	
-	makeTb(obj = {mid,pass,name,phone}){
-		let tr = "<tr>";
-		for( let prop in obj){
-			tr += "<td>" + obj[prop] + "</td>";
-		}
-		tr += "</tr>";
-		return tr;
-	}
 }
 
 export { table };
