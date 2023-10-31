@@ -43,19 +43,3 @@ tb1.appendChild(tbd);  // table 에 tbody를 하위요소로 등록
 document.querySelector('#show').appendChild(tb1);
 
 
-
-
-// table.appendChild(tbody);
-// document.getElementById('show').appendChild(table);
-// fruits.forEach((obj) =>{
-//     let fruitTr = document.createElement('tr');
-    
-//     let fruitTd = document.createElement('td');
-//     fruitTd.innerHTML = obj.name;
-//     let fruitTd1 = document.createElement('td');
-//     fruitTd1.innerHTML = obj.price;
-//     fruitTr.appendChild(fruitTd);
-//     fruitTr.appendChild(fruitTd1);
-
-//     tbody.appendChild(fruitTr);
-// })

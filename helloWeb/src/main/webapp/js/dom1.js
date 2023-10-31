@@ -6,22 +6,6 @@ const fruits = ['수박', '사과', '복숭아', '포도'];
 // createElement, appendChild, innerHTML 속성.
 
 
-
-let fruitul = document.createElement('ul');
-document.getElementById('show').appendChild(fruitul);
-
-
-document.querySelector('ul').appendChild(li5);
-let li5 = document.createElement('li')
-li5.innerHTML = "애플망고";
-
-fruits.forEach((item) => {
-	let fruitli = document.createElement('li');
-	fruitli.innerHTML = item;
-
-	fruitli.appendChild(fruitul);
-})
-
 // ul생성
 const ul = document.createElement('ul');
 // li 생성
@@ -32,10 +16,4 @@ fruits.forEach(fruit => {
 })
 
 document.getElementById('show').appendChild(ul);
-
-
-
-
-
-
 
