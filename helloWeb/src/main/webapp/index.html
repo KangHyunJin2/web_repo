@@ -15,9 +15,27 @@
 		<li>바나나</li>
 		<li>감자</li>
 	</ul>
-	<p>깃 추가 작업을 함</p>
-	<p>a의 상태로 변경.</p>
+	<p class="first">깃 추가 작업을 함</p>
+	<p id="second">a의 상태로 변경.</p>
 	<p>b의 상태변경.</p>
+	<script>
+		let body = document.querySelector('body');
+		//console.log(body.children[5].children[2].innerHTML = "메론");
+		//console.log(body.parentElement.innerHTML = "");
+		//document.querySelector('ul').innerHTML = '<p>Test</p>';	
+		
+		//li의 다섯번째 포도
+		let li5 = document.createElement('li');
+		li5.innerHTML = '포도';
+		console.log(li5);
+		document.querySelector('ul').appendChild(li5); //부모 자식관계를 만글겠다 appendChild
+		
+		let p4 = document.createElement('p');
+		p4.setAttribute('calss','fourth');
+		p4.innerHTML = 'c의 상태변경';
+		document.querySelector('p:nth-of-type(3)').after(p4); //요쇼 뒤에 넣을때 after
+		
+	</script>
 </body>
 
 </html>

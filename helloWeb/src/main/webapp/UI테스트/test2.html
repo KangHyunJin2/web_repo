@@ -28,14 +28,18 @@
                         tbody += '<td></td>';
                     } else {
                         if ((i-3) % 7 == 4) {
-                        
+							
                             tbody += '<td style="' + styles + '" align="right">' + (i-3) + '</td>';
+                            
                         } else if ((i-3) % 7 == 5) {
                    
                             tbody += '<td style="' + styles + '" align="right">' + (i-3) + '</td>';
+                            
                         } 
                         else {
+							
                             tbody += '<td style="' + styles + '" align="right">' + (i-3) + '</td>';
+                            
                         }
                     } 
                     if (i % 7 == 0) {
@@ -49,7 +53,7 @@
             show() {
                 let thead = this.makeHead();
                 let tbody = this.makeBody();
-                let table = '<p>2023년 11월 달력</p><table border="1">' + thead + tbody + '</table>'
+                let table = '<p>11월 달력</p><table border="1">' + thead + tbody + '</table>'
                 document.getElementById('show').innerHTML = table;
             }
         }
