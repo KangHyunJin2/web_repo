@@ -7,8 +7,7 @@ import co.yedam.student.service.StudentVO;
 
 public class StudentServiceImpl implements StudentService {
 	StudentDAO dao = new StudentDAO();
-	
-	
+
 	@Override
 	public boolean addStudent(StudentVO vo) {
 		return dao.insert(vo) == 1;
@@ -33,5 +32,8 @@ public class StudentServiceImpl implements StudentService {
 	public StudentVO getStudent(String sid) {
 		return dao.select(sid);
 	}
+	
+	
+	
 
 }

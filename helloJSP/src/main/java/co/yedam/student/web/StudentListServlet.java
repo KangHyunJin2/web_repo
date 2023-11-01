@@ -71,4 +71,3 @@ public class StudentListServlet extends HttpServlet {
 		System.out.println("destroy call.");
 	}
 }
-	
