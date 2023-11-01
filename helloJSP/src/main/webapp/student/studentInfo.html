@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>student/studentInfo.html</title>
+</head>
+
+<body>
+	<div="show">
+		<table border="1">
+			<thead>
+				<tr>
+					<th>아이디</th>
+					<th>생년월일</th>
+					<th>이름</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+			<tbody id="list">
+			</tbody>
+		</table>
+		</div>
+		<script>
+			//페이지 로딩되면서 바로 실행.
+			fetch('../studentList.do')
+				.then(resolve => resolve.json())
+				.then(result => {
+					console.log(result);
+					let tbody = document.querySelector('#list');
+					result.forEach(student => {
+						tbody.append(makeTr(student));
+					})
+				})
+				.catch(err => console.log('err', err));
+
+
+			function makeTr(obj) {
+				let showFields = ['studentId',  'studentBirthday', 'studentName' ,'studentDept']
+				let tr = document.createElement('tr');
+
+				for (let prop of showFields) {
+					let td = document.createElement('td');
+					td.innerHTML = obj[prop];
+					tr.append(td);
+				}
+				//				RemStudentServlet.do / delStudent.do
+				//삭제 버튼
+				let td = document.createElement('td');
+				let btn = document.createElement('button');
+				btn.setAttribute('data-sid', obj.studentId);
+				btn.innerHTML = '삭제';
+				btn.addEventListener('click', function (e) {
+					// ajax 호출. -> 서블릿실행.
+					fetch('../delStudent.do?sid=' + obj.studentId)
+						.then(resolve => resolve.json())
+						.then(result => {
+							console.log(result);
+							if(result.retCode == 'OK'){
+								alert('삭제성공');
+								tr.remove();
+							} else {
+								alert('삭제실패');
+							}
+						})
+						.catch(err => console.log('error: ', err));
+				})
+				td.append(btn);
+				tr.append(td);
+
+
+				return tr;
+			}
+
+//			for (let prop in obj) {
+//				if (showFields.indexOf(prop) == -1) {
+//					continue;
+//				}
+
+		</script>
+</body>
+
+</html>
