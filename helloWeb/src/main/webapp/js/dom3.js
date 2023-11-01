@@ -55,17 +55,31 @@ function genTable(rawData = [], page = 1){
 	//document.getElementById('show') //엘리먼트 아이디 쓰고 싶으면 이거
 	document.querySelector('#show').innerHTML = '';
 
-	//첫번째, 마지막 => 계산
+		
+	// 첫번째, 마지막 페이지 =>  계산.
 	let startNo = (page - 1) * 5;
 	let endNo = page * 5;
 		
 		// 첫번째, 마지막 페이지 =>  계산.
 	let totalCnt = rawData.length;
 	let lastPage = Math.ceil(totalCnt / 5);
-	let endPage = Math.ceil(page/5) * 5;
-	let beginPage = endPage -4;
-	let prevPage=false, nextPage =false;
 	
+	
+	let beginPage;
+	if(page > 3){
+		beginPage = page -2;
+	} else {
+		beginPage = 1;
+	}
+	let endPage = beginPage + 4;
+	
+	 document.querySelector('.pagination').innerHTML = '';
+//	let endPage = Math.ceil(page/5) * 5;	
+//	let beginPage = endPage -4;
+	
+	
+	
+	let prevPage=false, nextPage =false;
 	
 	if(beginPage > 1){
 		prevPage = true;
@@ -111,7 +125,7 @@ function genTable(rawData = [], page = 1){
 		aTag.setAttribute('href' , '#');
 		aTag.innerHTML = '&raquo;';
 		aTag.addEventListener('click' , function(e){
-			genTable(rawData, beginPage + 5);
+			genTable(rawData, endPage + 1);
 		})
 		document.querySelector('.pagination').append(aTag);
 	}
@@ -152,10 +166,3 @@ function genTable(rawData = [], page = 1){
 		})
 	})
 }
-/*	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-	var options = { //지도를 생성할 때 필요한 기본 옵션
-	center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-	level: 3 //지도의 레벨(확대, 축소 정도)
-};
-
-	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴*/
