@@ -59,8 +59,8 @@ function genTable(rawData = [], page = 1){
 	// 첫번째, 마지막 페이지 =>  계산.
 	let startNo = (page - 1) * 5;
 	let endNo = page * 5;
-		
-		// 첫번째, 마지막 페이지 =>  계산.
+
+	// 첫번째, 마지막 페이지 =>  계산.
 	let totalCnt = rawData.length;
 	let lastPage = Math.ceil(totalCnt / 5);
 	
@@ -71,6 +71,7 @@ function genTable(rawData = [], page = 1){
 	} else {
 		beginPage = 1;
 	}
+	
 	let endPage = beginPage + 4;
 	
 	 document.querySelector('.pagination').innerHTML = '';
