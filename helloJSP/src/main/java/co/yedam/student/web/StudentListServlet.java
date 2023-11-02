@@ -67,7 +67,6 @@ public class StudentListServlet extends HttpServlet {
 	
 	@Override
 	public void destroy() {
-		
 		System.out.println("destroy call.");
 	}
 }
