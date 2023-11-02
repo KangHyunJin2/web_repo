@@ -10,7 +10,8 @@ fetch('../studentList.do')
 		})
 	})
 	.catch(err => console.log('err', err));
-
+ 
+ 
 
 // 등록버튼 이벤트
 document.querySelector('#addBtn').addEventListener('click', addCallback);
