@@ -5,7 +5,7 @@ import table from './domTable.js';
 
 let url = 'https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=284&serviceKey=giBP07s5R8iY1FIU00JpkDiceZkxbXDFcBVWk1Qws2eTMFkxRcXP11nGYxQZVZI%2FgHch1qbxswUqDvD7J9OAHQ%3D%3D';
 let titles = ['센터id','센터명','의료원','연락처'];
-
+let big = '';
 
 
 fetch(url)
