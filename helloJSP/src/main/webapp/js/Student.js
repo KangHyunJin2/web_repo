@@ -1,17 +1,41 @@
 // student.js
+
+import svc from './service.js';
 //페이지 로딩되면서 바로 실행.
-fetch('../studentList.do')
-	.then(resolve => resolve.json())
-	.then(result => {
+//비동기방식코드 -> 순차적 가독성 높이기 async, await.
+// async 함수 (
+// await 처리. (promise 객체.)
+// await 처리. (promise 객체.)
+// await 처리. (promise 객체.)
+//)
+
+// fetch('../studentList.do')
+// 	.then(resolve => resolve.json())
+// 	.then(result => {
+// 		console.log(result);
+// 		let tbody = document.querySelector('#list');
+// 		result.forEach(student => {
+// 			tbody.append(makeTr(student));
+// 		})
+// 	})
+// 	.catch(err => console.log('err', err));
+
+svc.studentList(  // 목록가져오는거
+	// 성공후 실행함수.
+	result => {
 		console.log(result);
 		let tbody = document.querySelector('#list');
 		result.forEach(student => {
 			tbody.append(makeTr(student));
 		})
-	})
-	.catch(err => console.log('err', err));
- 
- 
+	},
+	//실패하면 실행함수
+	err => console.log('err', err)
+);
+
+
+
+
 
 // 등록버튼 이벤트
 document.querySelector('#addBtn').addEventListener('click', addCallback);
@@ -39,12 +63,15 @@ function addCallback(e) {
 	//fetch('../addStudent.do?' + param) // get방식
 
 	//post: 파라미터 표현X 값의제한이없다X content -> type지정
-	fetch('../addStudent.do', { //요청하는 url
-		method: 'post',
-		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-		body: param
-	}).then(resolve => resolve.json())
-		.then(result => {
+	svc.addStudent(
+		// optObj =>;
+		{
+			method: 'post',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: param
+		},
+		// successCallback
+		result => {
 			if (result.retCode == 'OK') {
 				alert('성공');
 				let tr = makeTr({ studentId: sid, studentName: sname, studentBirthday: birthday })
@@ -52,48 +79,93 @@ function addCallback(e) {
 			} else {
 				alert('실패');
 			}
-		})
-		.catch(err => console.log('err', err));
-} //end of addCallback
+		},
+		// errorCallback.
+		err => console.log('err', err)
+	);
+
+
+	// 	fetch('../addStudent.do', { //요청하는 url
+	// 		method: 'post',
+	// 		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+	// 		body: param
+	// 	}).then(resolve => resolve.json())
+	// 		.then(result => {
+	// 			if (result.retCode == 'OK') {
+	// 				alert('성공');
+	// 				let tr = makeTr({ studentId: sid, studentName: sname, studentBirthday: birthday })
+	// 				document.querySelector('#list').append(tr);
+	// 			} else {
+	// 				alert('실패');
+	// 			}
+	// 		})
+	// 		.catch(err => console.log('err', err));
+}  //end of addCallback
 
 
 function modifyCallback(e) {
-	let id =    document.querySelector('.modal-body input[name=sid]').value;
-	let pass =  document.querySelector('.modal-body input[name=pass]').value;;
-	let name =  document.querySelector('.modal-body input[name=name]').value;;
+	let id = document.querySelector('.modal-body input[name=sid]').value;
+	let pass = document.querySelector('.modal-body input[name=pass]').value;;
+	let name = document.querySelector('.modal-body input[name=name]').value;;
 	let birth = document.querySelector('.modal-body input[name=birth]').value;;
-	let dept = null;
-	let param = `id=${id}&name=${name}&password=${pass}&birthday=${birth}&dept=${dept}`;
+	let param = `id=${id}&name=${name}&password=${pass}&birthday=${birth}`;
 
 
-	fetch('../editStudent.do', {
-		method: 'post',
-		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-		body: param
-	}).then(resolve => resolve.json())
-		.then(result => {
+
+	svc.editStudent(
+		// 1) optObj
+		{
+			method: 'post',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: param
+		},
+		// 2) success
+		result => {
 			console.log(result);
 			if (result.retCode == 'OK') {
-				//result.vo.studentId;
-				//let targetTr = document.querySelector('tr[data-sid=' + result.vo.studentId+']');
-				//let newTr = makeTr(result.vo);
-				//let parentElem = document.querySelector('#list');
-				//parentElem.replaceChild(newTr, targetTr);
-				//document.getElementBuId("myModal").style.display = 'none';
 				alert('수정 성공');
 				let trTags = document.getElementById('list').querySelectorAll('tr');
-				trTags.forEach(obj =>{
-					if (obj.childNodes[0].innerText == id){
+				trTags.forEach(obj => {
+					if (obj.childNodes[0].innerText == id) {
 						obj.childNodes[1].innerHTML = name;
 						obj.childNodes[2].innerHTML = birth;
 					}
-				})
+					//3) eroorCall
+
+				});
 			} else {
 				alert('수정 실패');
 			}
-		})
-		.catch(err => console.log('err', err));
+		}),
+		err => console.log('err', err)
 
+	/*				fetch('../editStudent.do', {
+					method: 'post',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					body: param
+				}).then(resolve => resolve.json())
+					.then(result => {
+						console.log(result);
+						if (result.retCode == 'OK') {
+							//result.vo.studentId;
+							//let targetTr = document.querySelector('tr[data-sid=' + result.vo.studentId+']');
+							//let newTr = makeTr(result.vo);
+							//let parentElem = document.querySelector('#list');
+							//parentElem.replaceChild(newTr, targetTr);
+							//document.getElementBuId("myModal").style.display = 'none';
+							alert('수정 성공');
+							let trTags = document.getElementById('list').querySelectorAll('tr');
+							trTags.forEach(obj => {
+								if (obj.childNodes[0].innerText == id) {
+									obj.childNodes[1].innerHTML = name;
+									obj.childNodes[2].innerHTML = birth;
+								}
+							})
+						} else {
+							alert('수정 실패');
+						}
+					})
+					.catch(err => console.log('err', err));*/
 
 } //end of modifyCallback
 
@@ -120,7 +192,21 @@ function makeTr(obj) {
 	btn.innerHTML = '삭제';
 	btn.addEventListener('click', function(e) {
 		// ajax 호출. -> 서블릿실행.
-		fetch('../delStudent.do?sid=' + obj.studentId)
+
+		svc.removeStudent(obj.studentId,
+			result => {
+				console.log(result);
+				if (result.retCode == 'OK') {
+					alert('삭제성공');
+					tr.remove();
+				} else {
+					alert('삭제실패');
+				}
+			})
+		err => console.log('error: ', err)
+	})
+
+	/*	fetch('../delStudent.do?sid=' + obj.studentId)
 			.then(resolve => resolve.json())
 			.then(result => {
 				console.log(result);
@@ -131,14 +217,14 @@ function makeTr(obj) {
 					alert('삭제실패');
 				}
 			})
-			.catch(err => console.log('error: ', err));
-	})
+			.catch(err => console.log('error: ', err));*/
+	//}
 	td.append(btn);
 	tr.append(td);
 
 
 	return tr;
-}  // end makeTr
+} // end makeTr
 
 // 모달 보여주기
 function showModal(e) {
@@ -163,9 +249,8 @@ function showModal(e) {
 		}
 	}
 
-	fetch("../getStudent.do?sid=" + id)
-		.then(resolve => resolve.json())
-		.then(result => {
+	svc.getStudent(id,
+		result => {
 			modal.style.display = "block";
 
 			//let data = { id: "std1", name: "홍길동", pass: "1234", birth: "1995-04-01" };
@@ -175,10 +260,30 @@ function showModal(e) {
 			modal.querySelector('input[name=name]').value = result.studentName;
 			modal.querySelector('input[name=birth]').value = result.studentBirthday;
 			modal.querySelector('input[name=sid]').value = result.studentId;
-			
-			
+
+
 			console.log(modal.querySelector('input[name=sid]'));
 			console.log(modal.querySelector('input[name=sid]').value);
-		})
+		},
+		err => console.log('error => ', err)
+	)
+
+	/*	fetch("../getStudent.do?sid=" + id)
+			.then(resolve => resolve.json())
+			.then(result => {
+				modal.style.display = "block";
+	
+				//let data = { id: "std1", name: "홍길동", pass: "1234", birth: "1995-04-01" };
+				console.log(result.studentId);
+				modal.querySelector('h2').innerHTML = result.studentName;
+				modal.querySelector('input[name=pass]').value = result.studentPassword;
+				modal.querySelector('input[name=name]').value = result.studentName;
+				modal.querySelector('input[name=birth]').value = result.studentBirthday;
+				modal.querySelector('input[name=sid]').value = result.studentId;
+	
+	
+				console.log(modal.querySelector('input[name=sid]'));
+				console.log(modal.querySelector('input[name=sid]').value);
+			})*/
 
 }
