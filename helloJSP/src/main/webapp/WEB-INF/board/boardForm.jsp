@@ -29,7 +29,6 @@
 				<input type="reset" class="btn btn-warning" value="초기화">
 			</td>
 			</tr>
-			<hr>
 		</table>
 	</form>
 
