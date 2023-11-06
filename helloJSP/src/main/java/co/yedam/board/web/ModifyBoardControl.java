@@ -13,11 +13,11 @@ import co.yedam.board.service.BoardVO;
 import co.yedam.board.serviceImpl.BoardServiceImpl;
 import co.yedam.common.Command;
 
-public class AddBoardControl implements Command {
+public class ModifyBoardControl implements Command {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
-		// 제목, 내용 , 작성자.
+		// 파라메타활용 -> 데이터수정 -> 목록이동.
 		BoardVO vo = new BoardVO();
 		if (req.getMethod().equals("get")) {
 
@@ -41,7 +41,7 @@ public class AddBoardControl implements Command {
 								"UTF-8", // encoding
 								new DefaultFileRenamePolicy()// 리네임 정책
 						);
-
+				String bno = mr.getParameter("bno");	
 				String title = mr.getParameter("title");
 				String writer = mr.getParameter("writer");
 				String content = mr.getParameter("content");
@@ -51,6 +51,7 @@ public class AddBoardControl implements Command {
 				vo.setWriter(writer);
 				vo.setImage(img);
 				vo.setContent(content);
+				vo.setBoardNo(Integer.parseInt(bno));
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -59,7 +60,7 @@ public class AddBoardControl implements Command {
 		} // end of if
 
 		BoardService svc = new BoardServiceImpl();
-		if (svc.addBoard(vo)) {
+		if (svc.editBoard(vo)) {
 			try {
 				resp.sendRedirect("boardList.do");
 			} catch (IOException e) {
@@ -67,12 +68,13 @@ public class AddBoardControl implements Command {
 			}
 		} else {
 			try {
-				resp.sendRedirect("boardForm.do");
+				resp.sendRedirect("modifyForm.do");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-
-	} // end of execute
+		
+		
+	}
 
 }

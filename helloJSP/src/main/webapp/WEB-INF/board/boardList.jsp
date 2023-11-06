@@ -2,19 +2,15 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>게시판 목록.("WEB-INF/board/boardList.jsp")</title>
-</head>
-<body>
+<%@include file="../layout/menu.jsp" %>
+<%@include file="../layout/header.jsp" %>
+
 
 	<h3>게시판 목록.</h3>
 	<%
 	List<BoardVO> list = (List<BoardVO>) request.getAttribute("list"); //List<BoardVO> list;
 	%>
-	<table border="1">
+	<table class="table">
 		<thead>
 			<tr>
 				<th>글번호</th>
@@ -42,6 +38,4 @@
 	<p>
 		<a href="boardForm.do">등록화면</a>
 	</p>
-	
-</body>
-</html>
+<%@include file="../layout/footer.jsp" %>
