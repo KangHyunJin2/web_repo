@@ -10,11 +10,9 @@ public interface BoardService {
 	public boolean editBoard(BoardVO vo);
 	public boolean removeBoard(int boardNo);
 	
-<<<<<<< HEAD
+
 	//로그인
 	public MemberVO loginCheck(String id, String pw);
 	public List<MemberVO> memberList();
-=======
 	
->>>>>>> branch 'master' of https://github.com/KangHyunJin2/web_repo.git
 }

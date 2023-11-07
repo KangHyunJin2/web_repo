@@ -18,6 +18,8 @@ import co.yedam.board.web.ModifyBoardControl;
 import co.yedam.board.web.ModifyFormControl;
 import co.yedam.board.web.RemoveBoardControl;
 import co.yedam.board.web.RemoveFormControl;
+import co.yedam.reply.web.AddReplyControl;
+import co.yedam.reply.web.ReplyListControl;
 
 public class FrontController extends HttpServlet{ //.do 면 여기로 온다 
 	
@@ -37,18 +39,24 @@ public class FrontController extends HttpServlet{ //.do 면 여기로 온다
 			
 			//회원목록
 			map.put("/memberList.do", new MemberListControl());
-		
 			map.put("/boardList.do", new BoardListControl());
 			map.put("/getBoard.do", new GetBoardControl());
+			
 			//등록화면.
 			map.put("/boardForm.do", new BoardFormControl());
 			map.put("/addBoard.do", new AddBoardControl());
+			
 			//수정화면. 살제 처리하는건 board.do 이다
 			map.put("/modifyForm.do", new ModifyFormControl());
 			map.put("/modifyBoard.do", new ModifyBoardControl());
+			
 			//삭제화면
 			map.put("/removeForm.do", new RemoveFormControl());
 			map.put("/removeBoard.do", new RemoveBoardControl());
+			
+			//댓글목록.
+			map.put("/replyList.do", new ReplyListControl());
+			map.put("/addReply.do", new AddReplyControl());
 			
 			
 		}

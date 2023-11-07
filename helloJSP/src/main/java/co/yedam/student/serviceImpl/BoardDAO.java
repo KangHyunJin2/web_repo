@@ -47,7 +47,7 @@ public class BoardDAO {
 				vo.setLastUpdate(rs.getDate("last_update"));
 				vo.setTitle(rs.getString("title"));
 				vo.setViewCnt(rs.getInt("view_cnt"));
-				vo.setWriteDate(rs.getDate("writer_date"));
+				vo.setWriterDate(rs.getDate("writer_date"));
 				vo.setWriter(rs.getString("writer"));
 				list.add(vo);
 			}
@@ -75,7 +75,7 @@ public class BoardDAO {
 				vo.setLastUpdate(rs.getDate("last_update"));
 				vo.setTitle(rs.getString("title"));
 				vo.setViewCnt(rs.getInt("view_cnt"));
-				vo.setWriteDate(rs.getDate("writer_date"));
+				vo.setWriterDate(rs.getDate("writer_date"));
 				vo.setWriter(rs.getString("writer"));
 				return vo;
 			}

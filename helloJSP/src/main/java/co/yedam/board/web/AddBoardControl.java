@@ -41,7 +41,7 @@ public class AddBoardControl implements Command {
 								"UTF-8", // encoding
 								new DefaultFileRenamePolicy()// 리네임 정책
 						);
-
+				
 				String title = mr.getParameter("title");
 				String writer = mr.getParameter("writer");
 				String content = mr.getParameter("content");
@@ -51,7 +51,8 @@ public class AddBoardControl implements Command {
 				vo.setWriter(writer);
 				vo.setImage(img);
 				vo.setContent(content);
-
+				
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

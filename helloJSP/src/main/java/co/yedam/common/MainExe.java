@@ -1,18 +1,44 @@
 package co.yedam.common;
 
-import co.yedam.board.service.BoardVO;
-import co.yedam.student.serviceImpl.BoardDAO;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import co.yedam.reply.mapper.ReplyMapper;
+import co.yedam.reply.service.ReplyVO;
 
 public class MainExe {
 
 	public static void main(String[] args) {
-		BoardDAO dao = new BoardDAO();
-		BoardVO vo = new BoardVO();
-		vo.setTitle("test");
-		vo.setWriter("user03");
-		vo.setContent("content_modify");
-		vo.setBoardNo(5);
-		System.out.println(dao.update(vo)); //추가
+		SqlSession session = //
+				DataSourceMybatis.getInstance().openSession(true);
+		ReplyMapper mapper = session.getMapper(ReplyMapper.class);
+		List<ReplyVO> list = mapper.replyList(1);
+		list.forEach(vo -> System.out.println(vo));
+		
+		ReplyVO a = mapper.selectReply(5);
+		System.out.println(a);
+		
+		ReplyVO vo1 = new ReplyVO();
+		int b = mapper.insertReply(vo1);
+		
+		
+		
+		
+		int c = mapper.updateReply(vo1);
+		
+		
+		
+		
+		
+		
+//		BoardDAO dao = new BoardDAO();
+//		BoardVO vo = new BoardVO();
+//		vo.setTitle("test");
+//		vo.setWriter("user03");
+//		vo.setContent("content_modify");
+//		vo.setBoardNo(5);
+//		System.out.println(dao.update(vo)); //추가
 //		System.out.println(dao.insert(vo)); 여기다 if 문 추가하자
 		
 		
