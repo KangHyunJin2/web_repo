@@ -24,7 +24,7 @@
             	<%if (logId == null) { %>
                 <div class="sidebar-heading border-bottom bg-light">(Guest) 입니다</div>
                 <%} else { %>
-                <div class="sidebar-heading border-bottom bg-light">(<%=logId %>)입니다</div>
+                <div class="sidebar-heading border-bottom bg-light">(<%=logId %>)환영합니다</div>
                 <%} %>
                 
                 <div class="list-group list-group-flush">

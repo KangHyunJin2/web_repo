@@ -14,14 +14,14 @@
 		<table class="table">
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="title" value="<%=vo.getTitle() %>"></td>
+				<td><input type="text" name="title" class="form-control" value="<%=vo.getTitle() %>"></td>
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="writer" value="<%=vo.getWriter() %>"></td>
+				<td><input type="text" name="writer" class="form-control" value="<%=vo.getWriter() %>"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea cols="40" rows="5" name="content"<%=vo.getContent()%>></textarea>
+				<td colspan="2"><textarea cols="40" rows="5" class="form-control" name="content"<%=vo.getContent()%>></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -30,8 +30,8 @@
 			</tr>
 			<tr>
 			<td colspan="2" align="center">
-				<input type="submit" value="수정">
-				<input type="reset" value="초기화">
+				<input type="submit" class="btn btn-primary" value="수정">
+				<input type="reset" class="btn btn-warning" value="초기화">
 			</td>
 			</tr>
 		</table>
