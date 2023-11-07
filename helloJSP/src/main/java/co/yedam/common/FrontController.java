@@ -19,6 +19,7 @@ import co.yedam.board.web.ModifyFormControl;
 import co.yedam.board.web.RemoveBoardControl;
 import co.yedam.board.web.RemoveFormControl;
 import co.yedam.reply.web.AddReplyControl;
+import co.yedam.reply.web.DelReplyControl;
 import co.yedam.reply.web.ReplyListControl;
 
 public class FrontController extends HttpServlet{ //.do 면 여기로 온다 
@@ -30,8 +31,9 @@ public class FrontController extends HttpServlet{ //.do 면 여기로 온다
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-			//apdlsvpdlwl
+			//메인페이지
 			map.put("/main.do", new MainControl());
+			
 			//로그인	
 			map.put("/loginForm.do", new LoginFormControl());
 			map.put("/login.do", new LoginControl());
@@ -57,6 +59,9 @@ public class FrontController extends HttpServlet{ //.do 면 여기로 온다
 			//댓글목록.
 			map.put("/replyList.do", new ReplyListControl());
 			map.put("/addReply.do", new AddReplyControl());
+			
+			//댓글 삭제
+			map.put("/delReply.do", new DelReplyControl());
 			
 			
 		}

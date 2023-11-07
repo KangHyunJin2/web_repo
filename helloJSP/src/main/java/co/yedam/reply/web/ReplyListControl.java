@@ -24,7 +24,7 @@ public class ReplyListControl implements Command {
 		ReplyService svc = new ReplyServiceImpl();
 		List<ReplyVO> list = svc.replylist(Integer.parseInt(bno));
 		
-		Gson gson = new GsonBuilder().setDateFormat("yyy-MM-dd")//
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd")//
 				.create();
 		
 		String json = gson.toJson(list);

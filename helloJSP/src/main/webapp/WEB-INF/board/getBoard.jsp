@@ -34,7 +34,7 @@ BoardVO vo = (BoardVO) request.getAttribute("bno");
 			<%
 			if (vo.getImage() != null) {
 			%>
-			<td colspan="3"><img style="align: center;" width="150px"
+			<td colspan="3"><img style="align: center;" width="100px"
 				src="images/<%=vo.getImage()%>"></td>
 			<%
 			} else {
@@ -55,13 +55,16 @@ BoardVO vo = (BoardVO) request.getAttribute("bno");
 				<%
 				if (logId != null && logId.equals(vo.getWriter())) {
 				%> <input
-				type="submit" value="수정"> <input type="button" value="삭제">
+				type="submit" class="btn btn-primary" value="수정"> <input 
+				type="button" class="btn btn-warning" value="삭제">
 				<%
 				} else {
-				%> <input disabled type="submit" value="수정"> <input
-				disabled type="button" value="삭제"> <%
- }
- %>
+				%> 
+				<input disabled type="submit" value="수정">
+				<input disabled type="button" value="삭제"> 
+				<%
+				 }
+ 				%>
 			</td>
 		</tr>
 	</table>
@@ -78,12 +81,9 @@ BoardVO vo = (BoardVO) request.getAttribute("bno");
 
 <h3>댓글목록</h3>
 <ul id="list">
-	<li style="display : none;" id="template"><span>00</span><b>첫번째글입니다.</b><span>user01</span><span>2023-06-24</span></li>
+	<li style="display : none;" id="template"><span>00</span><b>첫번째글입니다.</b><span>user01</span><span>2023-06-24</span><button id = "delReply">삭제</button></li>
 </ul>
 
-<p>
-	<a href="boardList.do">목록으로</a>
-</p>
 <script>
 	document.querySelector("input[type=button]").addEventListener('click',
 			function(e) {
@@ -127,7 +127,7 @@ BoardVO vo = (BoardVO) request.getAttribute("bno");
 			if(result.retCode == 'OK'){
 				document.querySelector('#list').append(makeRow(result.vo));
 			} else{
-				alert('Error.')
+				alert('등록 실패')
 			}
 			
 		})
@@ -137,13 +137,35 @@ BoardVO vo = (BoardVO) request.getAttribute("bno");
 	function makeRow(reply){
 		let temp = document.querySelector('#template').cloneNode(true);
 		temp.style.display = 'block';
+		
 		console.log(temp);
 		temp.querySelector('span:nth-of-type(1)').innerHTML = reply.replyNo;
 		temp.querySelector('b').innerHTML = reply.reply;
 		temp.querySelector('span:nth-of-type(2)').innerHTML = reply.replyer;
 		temp.querySelector('span:nth-of-type(3)').innerHTML = reply.replyDate;
+		
+		temp.querySelector('#delReply').addEventListener('click', function(e){
+			fetch('delReply.do?bno=' + 
+					reply.replyNo
+			)
+			.then(resolve => resolve.json())
+			.then(result => {
+				if(result.retCode == 'OK'){
+					alert('삭제성공');
+					temp.remove();
+				} else {
+					alert('삭제실패');
+				}
+			
+			})
+		
+		})
 		return temp;
 	}
-</script>
-
+	
+	
+	</script>
+	<p>
+		 <a href="boardList.do">목록으로</a>
+	</p>
 <%@include file="../layout/footer.jsp"%>

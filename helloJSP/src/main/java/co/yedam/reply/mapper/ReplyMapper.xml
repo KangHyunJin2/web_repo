@@ -26,6 +26,6 @@
 	</update>
 	
 	<delete id="deleteReply" parameterType="int">
-		delete * from reply where reply_no = #{replyNo}
+		delete from reply where reply_no = #{replyNo}
 	</delete>
 </mapper>

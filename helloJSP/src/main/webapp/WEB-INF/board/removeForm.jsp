@@ -26,7 +26,7 @@
 				<td><input type="text" name="writer" value="<%=vo.getWriter() %>"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea cols="40" rows="5" name="content"<%=vo.getContent()%>></textarea>
+				<td colspan="2"><textarea name="content"<%=vo.getContent()%>></textarea>
 				</td>
 			</tr>
 			<tr>
