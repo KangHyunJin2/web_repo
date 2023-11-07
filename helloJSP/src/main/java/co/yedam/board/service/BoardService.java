@@ -9,18 +9,8 @@ public interface BoardService {
 	public boolean addBoard(BoardVO vo);
 	public boolean editBoard(BoardVO vo);
 	public boolean removeBoard(int boardNo);
-<<<<<<< HEAD
-	
 
-=======
-	
->>>>>>> refs/remotes/origin/master
 	//로그인
 	public MemberVO loginCheck(String id, String pw);
-	public List<MemberVO> memberList();
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
-	
+	public List<MemberVO> memberList();	
 }
