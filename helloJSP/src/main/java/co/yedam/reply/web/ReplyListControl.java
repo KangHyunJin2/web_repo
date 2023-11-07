@@ -29,7 +29,7 @@ public class ReplyListControl implements Command {
 		
 		String json = gson.toJson(list);
 		resp.setContentType("text/json;charset=utf-8");
-		
+		// 힘들다
 		try {
 			resp.getWriter().print(json);
 		} catch (IOException e) {
