@@ -63,6 +63,10 @@ public class FrontController extends HttpServlet{ //.do 면 여기로 온다
 			map.put("/delReply.do", new DelReplyControl());
 //			map.put("/removeReply.do", new RemoveReplyControl());
 			
+			//차트.
+			map.put("/chartForm.do", new ChartFormControl());
+			map.put("/drawChart.do", new DrawChartControl());
+			
 			
 		}
 	

@@ -40,7 +40,8 @@
 			<th>글번호</th>
 			<td class="boardNo">${bno.boardNo }</td>
 			<th>작성일시</th>
-			<td><fmt:formatDate value="${bno.writerDate }" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
+			<td><fmt:formatDate value="${bno.writerDate }"
+					pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
 		</tr>
 		<tr>
 			<th>글제목</th>
@@ -125,6 +126,8 @@
 		console.log(result);
 		if (pg < 0){
 			page = (Math.ceil(result.dto.total/5));
+			if(page <= 0)
+				page = 1;
 			showList(page);
 			return;
 		}

@@ -16,7 +16,7 @@
 	<h3>게시글 삭제화면</h3>
 	<form action="removeBoard.do" method="post">
 	<input type="hidden" name="bno" value="${vo.boardNo }">
-		<table border="1">
+		<table class="table">
 			<tr>
 				<th>제목</th>
 				<td><input type="text" name="title" value="${vo.title }"></td>
