@@ -1,71 +1,86 @@
-<%@page import="co.yedam.board.service.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<style>
-	#list span{
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<jsp:include page="../layout/menu.jsp"></jsp:include>
+<jsp:include page="../layout/header.jsp"></jsp:include>
+
+<style>
+#list span {
 	margin: 20px;
-	
-	}
-	</style>
-<%@include file="../layout/menu.jsp"%>
-<%@include file="../layout/header.jsp"%>
-<%
-BoardVO vo = (BoardVO) request.getAttribute("bno");
-%>
+}
+
+.pagination {
+	display: inline-block;
+}
+
+.pagination a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+.pagination a.active {
+	background-color: #4CAF50;
+	color: white;
+}
+
+.pagination a:hover:not(.active) {
+	background-color: #ddd;
+}
+</style>
 <h3>상세화면(조회화면)</h3>
 <form action="modifyForm.do" name="myfrm">
-	<input type="hidden" name="bno" value="<%=vo.getBoardNo()%>">
+	<input type="hidden" name="bno" value="${bno.boardNo }">
 	<table class="table">
 		<tr>
 			<th>글번호</th>
-			<td class="boardNo"><%=vo.getBoardNo()%></td>
+			<td class="boardNo">${bno.boardNo }</td>
 			<th>작성일시</th>
-			<td><%=vo.getWriterDate()%></td>
+			<td><fmt:formatDate value="${bno.writerDate }" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
 		</tr>
 		<tr>
 			<th>글제목</th>
-			<td colspan="3"><%=vo.getTitle()%></td>
+			<td colspan="3">${bno.title }</td>
 		</tr>
 		<tr>
-			<td colspan="4"><textarea rows="5" cols="40"><%=vo.getContent()%></textarea></td>
+			<td colspan="4"><textarea rows="5" cols="40">${bno.content }</textarea></td>
 		</tr>
 		<tr>
 			<th>이미지</th>
-			<%
-			if (vo.getImage() != null) {
-			%>
-			<td colspan="3"><img style="align: center;" width="100px"
-				src="images/<%=vo.getImage()%>"></td>
-			<%
-			} else {
-			%>
-			<td colspan="3"></td>
-			<%
-			}
-			%>
+			<c:choose>
+				<c:when test="${!empty bno.image }">
+					<td colspan="3"><img style="align: center;" width="100px"
+						src="images/${bno.image }"></td>
+				</c:when>
+				<c:otherwise>
+					<td colspan="3"></td>
+				</c:otherwise>
+			</c:choose>
+
+
+
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td><%=vo.getWriter()%></td>
+			<td>${bno.writer }</td>
 			<th>조회수</th>
-			<td><%=vo.getViewCnt()%></td>
+			<td>${bno.viewCnt }</td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center">
-				<%
-				if (logId != null && logId.equals(vo.getWriter())) {
-				%> <input
-				type="submit" class="btn btn-primary" value="수정"> <input 
-				type="button" class="btn btn-warning" value="삭제">
-				<%
-				} else {
-				%> 
-				<input disabled type="submit" value="수정">
-				<input disabled type="button" value="삭제"> 
-				<%
-				 }
- 				%>
-			</td>
+			<td colspan="4" align="center"><c:choose>
+					<c:when test="${!empty logId && logId == bno.writer }">
+						<input type="submit" class="btn btn-primary" value="수정">
+						<input type="button" class="btn btn-warning" value="삭제">
+					</c:when>
+					<c:otherwise>
+						<input disabled type="submit" value="수정">
+						<input disabled type="button" value="삭제">
+					</c:otherwise>
+				</c:choose></td>
 		</tr>
 	</table>
 </form>
@@ -75,14 +90,17 @@ BoardVO vo = (BoardVO) request.getAttribute("bno");
 	<tr>
 		<th>댓글내용</th>
 		<td><input type="text" id="content"></td>
-		<td><button id ="addReply">댓글등록</button></td>
+		<td><button id="addReply">댓글등록</button></td>
 	</tr>
 </table>
 
 <h3>댓글목록</h3>
 <ul id="list">
-	<li style="display : none;" id="template"><span>00</span><b>첫번째글입니다.</b><span>user01</span><span>2023-06-24</span><button id = "delReply">삭제</button></li>
+	<li style="display: none;" id="template"><span>00</span><b>첫번째글입니다.</b><span>user01</span><span>2023-06-24</span>
+		<button id="delReply">삭제</button></li>
 </ul>
+
+<div class="pagination"></div>
 
 <script>
 	document.querySelector("input[type=button]").addEventListener('click',
@@ -92,21 +110,77 @@ BoardVO vo = (BoardVO) request.getAttribute("bno");
 			});
 	
 	//댓글 목록.
-	let bno = "<%=vo.getBoardNo()%>";
-	let writer = "<%=logId%>";
+	let bno = "${bno.boardNo}";
+	let writer = "${logId}";
 	bno = document.querySelector('.boardNo').innerHTML;
-	fetch('replyList.do?bno=' + bno)
+	let page = 1;
+	
+	function showList(pg = 1){
+	document.querySelectorAll('#list li:not(:nth-of-type(1))')
+		.forEach(li => li.remove()); //첫번째 li 요소는 template 용도라서 남겨야함 지우지 않음.
+		
+	fetch('replyList.do?bno=' + bno + '&page=' + pg)
 	.then(resolve => resolve.json())
 	.then(result => {
 		console.log(result);
-		result.forEach(reply => {
+		if (pg < 0){
+			page = (Math.ceil(result.dto.total/5));
+			showList(page);
+			return;
+		}
+		result.list.forEach(reply => {
 			let li = makeRow(reply);
 			// ul>li 생성.
-			document.querySelector('#list').append(li);	
+			document.querySelector('#list').append(li);
+			
 		})
-		
+		//page생성 . 데이터 처리하는곳
+		makePaging(result.dto);
 	})
 	.catch(err => console.log(err));
+}// showList end
+showList();
+	
+	// 페이지링크 생성.
+	function makePaging(dto={}){
+		document.querySelector('.pagination').innerHTML = '';
+		
+		if(dto.prev){
+			let aTag = document.createElement('a');
+			aTag.setAttribute('href', dto.startPage - 1);
+			aTag.innerHTML = "&laquo;";
+			document.querySelector('.pagination').append(aTag);
+		}
+		for(let i = dto.startPage; i <= dto.endPage; i++){
+			let aTag = document.createElement('a');
+			aTag.setAttribute('href', i);
+			aTag.innerHTML = i;
+			// active 녹색.
+			if (i == page){
+				aTag.className = 'active'; //  class속성을 저장할 때 ... className.
+			}
+			document.querySelector('.pagination').append(aTag);
+		}
+		if(dto.next){
+			let aTag = document.createElement('a');
+			aTag.setAttribute('href', dto.endPage + 1);
+			aTag.innerHTML = "&raquo;";
+			document.querySelector('.pagination').append(aTag);
+		}
+		
+		// a에 클릭이벤트 등록.
+		document.querySelectorAll('.pagination a').forEach(elem => {
+			elem.addEventListener('click', function(e){
+				e.preventDefault(); // form, a => 링크기능 차단.
+				page = elem.getAttribute('href');
+				showList(page);
+			})
+		})
+		
+	}
+	
+
+	
 	
 	// 등록버튼.
 	document.querySelector('#addReply').addEventListener('click', function(e){
@@ -125,7 +199,8 @@ BoardVO vo = (BoardVO) request.getAttribute("bno");
 		.then(resolve => resolve.json())
 		.then(result =>{
 			if(result.retCode == 'OK'){
-				document.querySelector('#list').append(makeRow(result.vo));
+				//document.querySelector('#list').append(makeRow(result.vo));
+				showList(-1);
 			} else{
 				alert('등록 실패')
 			}
@@ -135,6 +210,23 @@ BoardVO vo = (BoardVO) request.getAttribute("bno");
 	
 	
 	function makeRow(reply){
+		
+/* 		function deleteCallback(e){
+			// 교수님 삭제
+			fetch('removeReply.do?rno=' + reply.replyNo)
+			.then(resolve => resolve.json())
+			.then(reulst => {
+				if(result.retCode == 'OK'){
+					alert('Success!!')
+					e.target.parentElement.remove();
+ 				} else {
+ 					alert('Error!!')
+ 				}
+			})
+			.catch(err => console.log(err))
+		} */
+		
+		
 		let temp = document.querySelector('#template').cloneNode(true);
 		temp.style.display = 'block';
 		
@@ -143,9 +235,17 @@ BoardVO vo = (BoardVO) request.getAttribute("bno");
 		temp.querySelector('b').innerHTML = reply.reply;
 		temp.querySelector('span:nth-of-type(2)').innerHTML = reply.replyer;
 		temp.querySelector('span:nth-of-type(3)').innerHTML = reply.replyDate;
+//		temp.querySelector('button').addEventListener('click', deleteCallback);
 		
+		//내가 만든 삭제
 		temp.querySelector('#delReply').addEventListener('click', function(e){
-			fetch('delReply.do?bno=' + 
+			//삭제 권한
+			if(writer != reply.replyer){
+				alert('권한이 없습니다.')
+				return;
+			}
+			//삭제 버튼
+			fetch('delReply.do?rno=' + 
 					reply.replyNo
 			)
 			.then(resolve => resolve.json())
@@ -153,6 +253,7 @@ BoardVO vo = (BoardVO) request.getAttribute("bno");
 				if(result.retCode == 'OK'){
 					alert('삭제성공');
 					temp.remove();
+					showList(-1);
 				} else {
 					alert('삭제실패');
 				}
@@ -165,7 +266,7 @@ BoardVO vo = (BoardVO) request.getAttribute("bno");
 	
 	
 	</script>
-	<p>
-		 <a href="boardList.do">목록으로</a>
-	</p>
-<%@include file="../layout/footer.jsp"%>
+<p>
+	<a href="boardList.do">목록으로</a>
+</p>
+<jsp:include page="../layout/footer.jsp"></jsp:include>

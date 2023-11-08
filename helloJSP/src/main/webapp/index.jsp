@@ -8,7 +8,8 @@
 </head>
 <body>
 	<%
-	response.sendRedirect("main.do");
+//	response.sendRedirect("main.do");
 	%>
+	<jsp:forward page="main.do"></jsp:forward>
 </body>
 </html>

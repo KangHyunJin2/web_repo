@@ -1,7 +1,6 @@
 package co.yedam.reply.web;
 
 import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,11 +13,13 @@ public class DelReplyControl implements Command {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
 		// TODO Auto-generated method stub
-		String bno = req.getParameter("bno");
+		String rno = req.getParameter("rno");
+		
+//		Map<String, String> map = new HashMap<>(); //을 써서 해보자
 		
 		ReplyService svc = new ReplyServiceImpl();
 		
-		if(svc.delReply(Integer.parseInt(bno))) {
+		if(svc.delReply(Integer.parseInt(rno))) {
 			try {
 				resp.getWriter().print("{\"retCode\" : \"OK\"}");
 			} catch (IOException e) {

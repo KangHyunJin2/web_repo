@@ -58,14 +58,18 @@ public class FrontController extends HttpServlet{ //.do 면 여기로 온다
 			
 			//댓글목록.
 			map.put("/replyList.do", new ReplyListControl());
-			map.put("/addReply.do", new AddReplyControl());
-			
+			map.put("/addReply.do", new AddReplyControl());		
 			//댓글 삭제
 			map.put("/delReply.do", new DelReplyControl());
+//			map.put("/removeReply.do", new RemoveReplyControl());
 			
 			
 		}
-		//		map.put("/FirstServlet.do" , new FirstContorl());
+	
+	
+	
+	
+//		map.put("/FirstServlet.do" , new FirstContorl());
 //		map.put("/second.do" , new SecondControl());
 	
 

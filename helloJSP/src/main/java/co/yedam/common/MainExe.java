@@ -13,23 +13,28 @@ public class MainExe {
 		SqlSession session = //
 				DataSourceMybatis.getInstance().openSession(true);
 		ReplyMapper mapper = session.getMapper(ReplyMapper.class);
-		List<ReplyVO> list = mapper.replyList(1);
-		list.forEach(vo -> System.out.println(vo));
 		
-		ReplyVO a = mapper.selectReply(5);
-		System.out.println(a);
-		
-		ReplyVO vo1 = new ReplyVO();
-		int b = mapper.insertReply(vo1);
+		mapper.replyList(1, 1).forEach(rep -> System.out.println(rep));
 		
 		
 		
 		
-		int c = mapper.updateReply(vo1);
 		
+//		List<ReplyVO> list = mapper.replyList(1);
 		
+//		list.forEach(vo -> System.out.println(vo));
 		
+//		ReplyVO a = mapper.selectReply(5);
 		
+//		System.out.println(a);
+//		
+//		ReplyVO vo1 = new ReplyVO();
+//		int b = mapper.insertReply(vo1);
+//		
+//		
+//		
+//		
+//		int c = mapper.updateReply(vo1);
 		
 		
 //		BoardDAO dao = new BoardDAO();
