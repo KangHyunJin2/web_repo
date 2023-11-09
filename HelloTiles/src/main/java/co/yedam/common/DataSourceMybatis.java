@@ -20,7 +20,6 @@ public class DataSourceMybatis {
 		try {
 			inputStream = Resources.getResourceAsStream(resource);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);

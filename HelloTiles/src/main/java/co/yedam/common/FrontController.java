@@ -11,9 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.yedam.admin.web.MemberListControl;
+import co.yedam.board.web.AddBoardControl;
+import co.yedam.board.web.BoardFormControl;
 import co.yedam.board.web.BoardListControl;
-//import co.yedam.board.web.GetBoardControl;
 import co.yedam.board.web.GetBoardControl;
+import co.yedam.board.web.ModifyBoardControl;
+import co.yedam.board.web.ModifyFormControl;
+import co.yedam.board.web.RemoveBoardControl;
+import co.yedam.reply.web.AddReplyControl;
+import co.yedam.reply.web.ReplyListControl;
 
 
 
@@ -31,6 +37,24 @@ public class FrontController extends HttpServlet{ //.do 면 여기로 온다
 			map.put("/boardList.do", new BoardListControl());
 			map.put("/getBoard.do", new GetBoardControl());
 			
+			map.put("/loginForm", new LoginFormControl());
+			map.put("/login.do", new LoginControl());
+			map.put("/logout.do", new LogOutControl());
+			
+			map.put("/boardForm.do", new BoardFormControl());
+			map.put("/addBoard.do", new AddBoardControl());
+			
+			map.put("/modifyForm.do", new ModifyFormControl());
+			map.put("/modifyBoard.do", new ModifyBoardControl());
+			
+			map.put("/removeBoard.do", new RemoveBoardControl());
+			
+			map.put("/replyList.do", new ReplyListControl());
+			map.put("/addReply.do", new AddReplyControl());
+			map.put("/removeReply.do", new RemoveBoardControl());
+			
+			map.put("/chartForm.do", new ChartFormControl());
+			map.put("/drawChart.do", new DrawChartControl());
 			
 		}
 	

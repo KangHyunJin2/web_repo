@@ -8,9 +8,9 @@
 	<div class="list-group list-group-flush">
 		<a
 			class="list-group-item list-group-item-action list-group-item-light p-3"
-			href="#!">Dashboard</a> <a
+			href="boardList.do">게시판목록</a> <a
 			class="list-group-item list-group-item-action list-group-item-light p-3"
-			href="#!">Shortcuts</a> <a
+			href="loginForm.do">로그인</a> <a
 			class="list-group-item list-group-item-action list-group-item-light p-3"
 			href="#!">Overview</a> <a
 			class="list-group-item list-group-item-action list-group-item-light p-3"
