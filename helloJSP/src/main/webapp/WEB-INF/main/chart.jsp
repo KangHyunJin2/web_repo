@@ -17,11 +17,12 @@
     	  fetch('drawChart.do')
     	  .then(resolve => resolve.json())
     	  .then(result => {
-    		  console.log(result);
+    		  console.log(result);	// {}
     		  let dataAry = [['Writer', 'Cnt']];
     		  result.forEach(item =>{
-    			  dataAry.push([item.REPLYER, item.CNT])
+    			  dataAry.push([item.replyer, item.cnt])
     		  })
+    		  //[['writer','cnt'],['m001','12'],['m001','12'],['m001','12']] 콘솔창에 띄웠을때 이런느낌으로 값과 숫자가 배열로
     		  console.log(dataAry);
     		  var data = google.visualization.arrayToDataTable(dataAry);
 
