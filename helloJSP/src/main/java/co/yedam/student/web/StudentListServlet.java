@@ -22,7 +22,7 @@ import co.yedam.student.serviceImpl.StudentServiceImpl;
 @WebServlet("/studentList.do")
 public class StudentListServlet extends HttpServlet {
 	// 생명주기 : init -> service -> destroy
-
+    //저장이 안되네
 	
 	public StudentListServlet() {
 		System.out.println("생성자 call.");
@@ -67,8 +67,6 @@ public class StudentListServlet extends HttpServlet {
 	
 	@Override
 	public void destroy() {
-		
 		System.out.println("destroy call.");
 	}
 }
-	
