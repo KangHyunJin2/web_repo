@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tiles-definitions>
+<definition name="boardpage" template="/WEB-INF/layouts/template.jsp">
+     <put-attribute name="header" value="/WEB-INF/layouts/header.jsp" />
+     <put-attribute name="body" value="/WEB-INF/layouts/body.jsp" />
+     <put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp" />
+  </definition>
+   <definition name="WILDCARD:product/*" extends="boardpage" >
+  	 <put-attribute name="body" value="/WEB-INF/product/{1}.jsp" />
+  </definition>
+
+  
+</tiles-definitions>
