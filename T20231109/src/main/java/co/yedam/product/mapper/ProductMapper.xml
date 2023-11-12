@@ -5,11 +5,14 @@
 
 	<select id="selectList"
 		resultType="co.yedam.product.service.ProductVO">
-		select * from tbl_product
+		select * from tbl_product order by prod_code
 	</select>
 
 	<select id="select" resultType="co.yedam.product.service.ProductVO">
 		select * from tbl_product where prod_code =#{prodCode}
 	</select>
 	
+	<select id="selectRelist" resultType="co.yedam.product.service.ProductVO">
+		select * from tbl_product order by like_it desc
+	</select>
 </mapper>

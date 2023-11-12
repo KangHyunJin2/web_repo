@@ -4,6 +4,6 @@ create table tbl_product (
   prod_desc varchar2(500) not null, -- 상품의 설명.
   price number not null, -- 상품의 원래가격.
   off_price number not null, -- 할인된 가격.
-  like_it number default, 3 -- 1 ~ 5점의 평점.
+  like_it number default 3, -- 1 ~ 5점의 평점.
   prod_image varchar2(100)
 );

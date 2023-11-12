@@ -16,14 +16,17 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<ProductVO> productList() {
-		// TODO Auto-generated method stub
 		return mapper.selectList();
 	}
 
 	@Override
 	public ProductVO getProduct(String prodCode) {
-		// TODO Auto-generated method stub
 		return mapper.select(prodCode);
+	}
+
+	@Override
+	public List<ProductVO> selectList() {
+		return mapper.selectList();
 	}
 
 

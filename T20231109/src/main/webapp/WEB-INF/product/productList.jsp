@@ -3,8 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<h3>상품목록</h3>
-        <section class="py-5">
+		<header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Shop in style</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+                </div>
+            </div>
+        </header>
+
+       
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <!-- 상품목록 -->
@@ -24,11 +32,9 @@
                                     <h5 class="fw-bolder">${product.prodName }</h5>
                                     <!-- Product reviews-->
                                     <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
+                                        <c:forEach var="i" begin="1" end="${product.likeIt }" step="1">
+                                        	<div class="bi-star-fill"></div>
+                                        </c:forEach>
                                     </div>
                                     <!-- Product price-->
                                     <span class="text-muted text-decoration-line-through">${product.price }</span>
@@ -37,7 +43,7 @@
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="productInfo.do?code=${product.prodCode }">Add to cart</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="productInfo.do?pno=${product.prodCode }">Add to cart</a></div>
                             </div>
                         </div>
                     </div>
@@ -45,4 +51,3 @@
                 <!-- 상품목록 -->
                 </div>
             </div>
-        </section>

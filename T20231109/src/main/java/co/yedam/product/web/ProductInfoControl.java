@@ -1,5 +1,7 @@
 package co.yedam.product.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,13 +15,20 @@ public class ProductInfoControl implements Command {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
 		// TODO Auto-generated method stub
-		String path = "productInfo.do";
+		String path = "product/productInfo.tiles";
 	
-		String code = req.getParameter("Code");
+		String pno = req.getParameter("pno");
 		
 		ProductService svc = new ProductServiceImpl();
 		
-		ProductVO vo = svc.getProduct(code);
+		ProductVO vo = svc.getProduct(pno);
+		
+		req.setAttribute("vo", vo);
+		
+		
+		List<ProductVO> list = svc.selectList();
+		
+		req.setAttribute("list", list);
 		
 		
 			try {

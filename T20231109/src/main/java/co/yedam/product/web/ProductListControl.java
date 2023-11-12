@@ -19,6 +19,8 @@ public class ProductListControl implements Command {
 		ProductService svc = new ProductServiceImpl();
 		List<ProductVO> list = svc.productList();
 		
+		System.out.println(list);
+		
 		req.setAttribute("list", list);
 		
 		try {
